@@ -132,7 +132,8 @@ input {
     text-transform: uppercase;
     padding: 10px;
     position: absolute;
-    bottom: 60px;
+    top: 30px;
+    right: 30px;
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -167,6 +168,10 @@ input {
     .div-button button {
         padding: 14px;
     }
+    #trocar-button {
+        right: 20px;
+        top: 20px;
+    }
 }
 
 @media (max-width: 321px) {
@@ -178,6 +183,6 @@ input {
         height: 50px;
     }
     #trocar-button {
-        bottom: 115px
+        padding: 7px;
     }
 }
