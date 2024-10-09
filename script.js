@@ -4,6 +4,11 @@ const form = document.querySelector('form');
 const pMensagem = document.getElementById('p-mensagem');
 let numDiv = 0;
 
+const trocarButton = document.getElementById('trocar-button');
+trocarButton.addEventListener('click', function() {
+    location.reload()
+})
+
 let listaPalavras = [
     'amigo', 'salvo', 'piano', 'pasta', 'carta',
     'peito', 'salto', 'carro', 'menta', 'banco',
