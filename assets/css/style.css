@@ -94,27 +94,26 @@ input {
     }
 }
 
-
-button {
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 6px 20px;
-    background-color: var(--cor-sec);
-    color: var(--cor-ter);
-    border: none;
-    border-radius: 0.2rem;
-    &:hover {
-        background-color: rgba(235, 241, 255, 0.829)
-    }
-}
-
 .div-button {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    & button {
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1.2rem;
+        line-height: 15px;
+        padding: 20px;
+        background-color: var(--cor-sec);
+        color: var(--cor-ter);
+        border: none;
+        border-radius: 0.2rem;
+        &:hover {
+            background-color: rgba(235, 241, 255, 0.829)
+        }
+    }
 }
 
 #p-mensagem {
@@ -127,7 +126,10 @@ button {
 }
 
 #trocar-button {
-    padding: 8px 10px;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
     position: absolute;
     bottom: 60px;
     font-size: 1rem;
