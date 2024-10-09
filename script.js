@@ -5,7 +5,26 @@ const pMensagem = document.getElementById('p-mensagem');
 let numDiv = 0;
 
 let listaPalavras = [
-    'amigo'
+    'amigo', 'salvo', 'piano', 'pasta', 'carta',
+    'peito', 'salto', 'carro', 'menta', 'banco',
+    'poste', 'sorte', 'tigre', 'peixe', 'cesta',
+    'festa', 'bicho', 'dolar', 'grato', 'tinta',
+    'cinto', 'brisa', 'fruta', 'torre', 'troco',
+    'linda', 'junto', 'dente', 'salao', 'verde',
+    'trigo', 'sabor', 'pouco', 'corte', 'amplo',
+    'jovem', 'tempo', 'vazio', 'banda', 'cacau',
+    'cabra', 'certa', 'falar', 'ninho', 'mundo',
+    'pente', 'vinho', 'norte', 'clima', 'fluir',
+    'canal', 'comer', 'fazer', 'sinal', 'doido',
+    'manga', 'pinho', 'leite', 'firme', 'pegar',
+    'bolsa', 'pacto', 'calor', 'jogar', 'dizer',
+    'morar', 'novas', 'lente', 'trono', 'parar',
+    'grilo', 'navio', 'ficha', 'vapor', 'gente',
+    'barco', 'pensa', 'limpo', 'raiva', 'calça',
+    'acido', 'votar', 'poema', 'rumor', 'rimar',
+    'deixa', 'notas', 'macho', 'pauta', 'lavar',
+    'cifra', 'troca', 'fosso', 'carne', 'morte', 
+    'seção', 'bicho', 'fundo', 'canto', 'termo'
 ];
 
 let palavra = '';
@@ -87,15 +106,29 @@ form.addEventListener('submit', function(e) {
         }
     })
 
+    const copiaResposta = [...caracteresResposta];
+
     respostasUser.forEach((input, index) => {
-        if (input.value === caracteresResposta[index]) {
+        if (input.value === copiaResposta[index]) {
             input.style.backgroundColor = 'var(--cor-right)';
-        } else if (caracteresResposta.includes(input.value) && input.value !== caracteresResposta[index]) {
-            input.style.backgroundColor = 'var(--cor-quase)';
-        } else {
-            input.style.backgroundColor = 'var(--cor-ter)';
+            copiaResposta[index] = null; // Marca a letra correta
         }
-        
+    });
+
+    // Segunda passagem para verificar letras quase corretas
+    respostasUser.forEach((input, index) => {
+        if (input.value !== caracteresResposta[index]) { // Verifica apenas se não é a letra correta
+            if (copiaResposta.includes(input.value)) {
+                input.style.backgroundColor = 'var(--cor-quase)';
+                const indexRepetido = copiaResposta.indexOf(input.value);
+                if (indexRepetido >= 0) {
+                    copiaResposta[indexRepetido] = null; // Marca a letra quase correta
+                }
+            } else {
+                input.style.backgroundColor = 'var(--cor-ter)'; // Marca a letra incorreta
+            }
+        }
+
         input.style.border = 'none';
         input.style.opacity = '1';
         input.style.color = 'white';

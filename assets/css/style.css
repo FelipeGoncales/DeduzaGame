@@ -78,7 +78,7 @@ input {
     height: 85px;
     text-align: center;
     caret-color: transparent;
-    border: 5px solid var(--cor-sec);
+    border: 4px solid var(--cor-sec);
     background: none;
     outline: none;
     opacity: 0.3;
