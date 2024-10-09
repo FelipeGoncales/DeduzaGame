@@ -1,19 +1,54 @@
+@import url(https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&display=swap);
+
 * {
     font-size: 20px;
     padding: 0;
     margin: 0;
+    font-family: "Baloo Paaji 2", sans-serif;
+}
+
+:root {
+    --bg-color: #1e1f33;
+    --cor-sec: #ebf1ff;
+    --cor-ter: #191236;
+    --cor-right: #04ba93;
+    --cor-quase: #df9e26;
 }
 
 body {
+    padding-top: 40px;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
+    gap: 30px;
     align-items: center;
     justify-content: center;
+    background-color: var(--bg-color);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    padding: 40px 0;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-size: 3.4rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: var(--cor-sec);
+    line-height: 3rem;
 }
 
 form {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -21,13 +56,71 @@ form {
     justify-content: center;
 }
 
-.div-inputs {
+#div-inputs {
     display: flex;
+    flex-direction: column;
+    gap: 7px;
+    & div{
+        display: flex;
+        gap: 7px;
+    }
 }
 
 input {
-    width: 50px;
-    height: 50px;
+    box-sizing: border-box;
+    line-height: -10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2.3rem;
+    color: var(--cor-sec);
+    border-radius: 0.3rem;
+    width: 85px;
+    height: 85px;
     text-align: center;
     caret-color: transparent;
+    border: 5px solid var(--cor-sec);
+    background: none;
+    outline: none;
+    opacity: 0.3;
+    &:disabled {
+        background-color: #ebf1ff;
+        opacity: 0.05;
+        color: var(--bg-color);
+    }
+    &:focus {
+        padding: 0;
+        opacity: 1;
+    }
+}
+
+
+button {
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 6px 20px;
+    background-color: var(--cor-sec);
+    color: var(--cor-ter);
+    border: none;
+    border-radius: 0.2rem;
+    &:hover {
+        background-color: rgba(235, 241, 255, 0.829)
+    }
+}
+
+.div-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#p-mensagem {
+    justify-self: flex-start;
+    line-height: 1.2rem;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    color: var(--cor-sec);
+    font-weight: bold;
 }
