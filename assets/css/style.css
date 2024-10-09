@@ -126,6 +126,7 @@ input {
 }
 
 #trocar-button {
+    cursor: pointer;
     border: none;
     font-weight: bold;
     text-transform: uppercase;
@@ -142,6 +143,9 @@ input {
     & i {
         font-size: 0.9rem;
     }
+    &:hover {
+        background-color: rgba(235, 241, 255, 0.829)
+    }
 }
 
 
@@ -153,20 +157,21 @@ input {
         padding: 0;
     }
     header {
+        padding: 0;
         position: static;
     }
     input {
         width: 60px;
         height: 60px;
     }
+    .div-button button {
+        padding: 14px;
+    }
 }
 
 @media (max-width: 321px) {
     * {
         font-size: 13px;
-    }
-    header {
-        padding: 10px 0;
     }
     input {
         width: 50px;
