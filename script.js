@@ -90,11 +90,18 @@ document.addEventListener('DOMContentLoaded', function() {
         divInputs.appendChild(div);
     };
 
-    for (letra of alfabeto) {
+    alfabeto.forEach((letra) => {
         let p = document.createElement('p');
         p.textContent = letra;
+        p.id = letra;
         divLetras.appendChild(p);
+
+        p.addEventListener('click', function() {
+            const input = document.activeElement;
+            input.value = p.textContent
+        })
     }
+    )
 });
 
 
@@ -131,36 +138,59 @@ form.addEventListener('submit', function(e) {
     const copiaResposta = [...caracteresResposta];
 
     respostasUser.forEach((input, index) => {
-        if (input.value === copiaResposta[index]) {
+        const value = (input.value).toLocaleLowerCase()
+
+        if (value === copiaResposta[index]) {
             window.requestAnimationFrame(() => input.classList.add('correto')); // Forçar repaint
             copiaResposta[index] = null; // Marca a letra correta
+            
+            const letra = document.getElementById(value);
+            if (Array.from(letra.classList).includes('letra-quase')) {
+                letra.classList.replace('letra-quase','letra-correta');
+            }
+            if (Array.from(letra.classList).includes('letra-incorreta')) {
+                letra.classList.replace('letra-incorreta', 'letra-correta');
+            }
+            letra.classList.add('letra-correta');
         }        
     });
 
     // Segunda passagem para verificar letras quase corretas
     respostasUser.forEach((input, index) => {
-        if (input.value !== caracteresResposta[index]) { // Verifica apenas se não é a letra correta
-            if (copiaResposta.includes(input.value)) {
+        const value = (input.value).toLocaleLowerCase()
+        const letra = document.getElementById(value);
+
+        if (value !== caracteresResposta[index]) { // Verifica apenas se não é a letra corretaSSS
+            if (copiaResposta.includes(value)) {
                 input.classList.add('quase-correto')
-                const indexRepetido = copiaResposta.indexOf(input.value);
+
+                if (!Array.from(letra.classList).includes('letra-correta')) {
+                    letra.classList.add('letra-quase')
+                }
+
+                const indexRepetido = copiaResposta.indexOf(value);
                 if (indexRepetido >= 0) {
                     copiaResposta[indexRepetido] = null; // Marca a letra quase correta
                 }
             } else {
                 input.style.backgroundColor = 'var(--cor-ter)'; // Marca a letra incorreta
+                
+                if (!Array.from(letra.classList).includes('letra-correta')) {
+                    letra.classList.add('letra-incorreta');
+                }
             }
         }
 
         input.disabled = true;
 
-        word += input.value;
+        word += value;
     });
 
     if (word === palavra) {
-        pMensagem.textContent = 'Você acertou!'
+        pMensagem.textContent = 'Você acertou!';
         return;
     } else if (numDiv === divInputs.children.length - 1) {
-        pMensagem.innerHTML = `Você perdeu!<br>Resposta: "${palavra}"`
+        pMensagem.innerHTML = `<span>Você perdeu!</span> <span>Resposta: "${palavra}"</span>`;
         return;
     } else if (numDiv < divInputs.children.length - 1) {
         numDiv++;
