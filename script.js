@@ -193,11 +193,11 @@ form.addEventListener('submit', function(e) {
 
     if (word === palavra) {
         pMensagem.textContent = 'Você acertou!';
-        pMensagem.style.display = 'block';
+        pMensagem.style.display = 'flex';
         return;
     } else if (numDiv === divInputs.children.length - 1) {
         pMensagem.innerHTML = `Resposta: "${palavra}"`;
-        pMensagem.style.display = 'block';
+        pMensagem.style.display = 'flex';
         return;
     } else if (numDiv < divInputs.children.length - 1) {
         numDiv++;

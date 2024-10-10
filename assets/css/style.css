@@ -47,12 +47,14 @@ header {
     padding-top: 7px;
     border-radius: 5px;
     bottom: -45px;
+    align-items: center;
+    justify-content: center;
     justify-content: center;
     position: absolute;
     height: 22px;
     line-height: 1.2rem;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--cor-sec);
     font-weight: bold;
 }
@@ -70,7 +72,7 @@ form {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 7vh;
     align-items: center;
     justify-content: center;
     & button  {
@@ -121,7 +123,7 @@ input {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 460px;
+    width: 520px;
     & p { 
         display: flex;
         justify-content: center;
@@ -130,7 +132,7 @@ input {
         text-transform: uppercase;
         font-weight: bold;
         color: var(--bg-color);
-        width: 44px;
+        width: 50px;
         height: 7vh;
         border-radius: 5px;
         background-color: #35375a;
@@ -216,9 +218,12 @@ input {
     }
     input {
         font-size: 2.3rem;
-        height: 16vw;
-        width: 16vw;
+        height: 13vw;
+        width: 13vw;
         border: 3px solid var(--cor-sec);
+    }
+    form {
+        gap: 3vh;
     }
     #div-letras {
         width: 92vw;
