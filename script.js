@@ -47,12 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         input.addEventListener('input', function() {
             enterProximoInput(input, index, div);
-
-            setTimeout(() => {
-                if (input.value !== '') {
-                    enterProximoInput(input, index, div);
-                }
-            }, 0);
         });
 
         input.addEventListener('keydown', function(event) {
@@ -122,6 +116,18 @@ form.addEventListener('submit', function(e) {
     respostasUser.forEach((input, index) => {
         if (input.value === copiaResposta[index]) {
             input.classList.add('correto')
+            copiaResposta[index] = null; // Marca a letra correta
+        }
+
+        if (input.value === copiaResposta[index]) {
+            input.classList.add('correto');
+            setTimeout(() => input.classList.add('correto'), 0); // Forçar repaint
+            copiaResposta[index] = null; // Marca a letra correta
+        }
+
+        if (input.value === copiaResposta[index]) {
+            input.classList.add('correto');
+            window.requestAnimationFrame(() => input.classList.add('correto'));
             copiaResposta[index] = null; // Marca a letra correta
         }
     });
