@@ -178,7 +178,7 @@ form.addEventListener('submit', function(e) {
                     copiaResposta[indexRepetido] = null;
                 }
             } else {
-                input.style.backgroundColor = 'var(--cor-ter)';
+                input.classList.add('incorreto');
                 
                 if (!letra.classList.contains('letra-correta') && !letra.classList.contains('letra-quase')) {
                     letra.classList.add('letra-incorreta');
