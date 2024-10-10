@@ -21,7 +21,6 @@ body {
     position: relative;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -44,7 +43,7 @@ header {
     display: none;
     background-color: #0e37f0;
     padding: 5px 10px;
-    padding-top: 7px;
+    padding-top: 9px;
     border-radius: 5px;
     bottom: -45px;
     align-items: center;
@@ -207,29 +206,27 @@ input {
         top: 15px;
         right: 13px;
     }
+    form {
+        gap: 7vh;
+        padding-bottom: 90px;
+    }
 }
 
 @media (max-width: 480px) {
     * {
         font-size: 15px;
     }
-    header {
-        margin-top: 40px;
-    }
     input {
-        font-size: 2.3rem;
-        height: 13vw;
-        width: 13vw;
+        font-size: 2rem;
+        height: 12vw;
+        width: 12vw;
         border: 3px solid var(--cor-sec);
-    }
-    form {
-        gap: 3vh;
     }
     #div-letras {
         width: 92vw;
         gap: 7px;
         & p {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             width: 8vw;
         }
     }

@@ -59,9 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         input.addEventListener('keydown', function(event) {
             manipularKeys(event, input, index, div);
-            if (!alfabeto.contains(event.key)) {
-                event.preventDefault()
-            }
         });
 
         div.appendChild(input);
@@ -214,37 +211,63 @@ form.addEventListener('submit', function(e) {
 
 function enterProximoInput(input, index, div) {
     if (input.value !== '') {
-        for (i = 0; i < caracteresResposta.length; i++) {
-            if (div.children[i].value === '') {
-                div.children[i].focus();
-                break;
-            }
-        }
-    }
-
-    if (input.value.length === 1 && index < caracteresResposta.length - 1 && input.value !== '') {
-        div.children[index + 1].focus();
-    } 
+        if (index < div.children.length-1) { 
+            if (div.children[index + 1].value !== '') {
+                let count = 0;
+                for (i = index; i < div.children.length; i++) {
+                    if (div.children[i].value !== '') {
+                        count++;
+                    };
+                };
+                div.children[count].focus();
+            } else {
+                div.children[index + 1].focus();
+            };
+        } else if (index === div.children.length - 1) {
+            for (let i = 0; i < div.children.length; i++) {
+                if (div.children[i].value === '') {
+                    div.children[i].focus();
+                    break;
+                };
+            };   
+        };
+    };
 };
 
 function manipularKeys(item, input, index, div) {
-    if (['ArrowLeft', 'ArrowRight', 'ArrowDown', 'ArrowUp'].includes(item.key)) {
+    if (!alfabeto.includes(item.key) && !['Enter', 'Backspace'].includes(item.key)) {
         item.preventDefault();
     }
-
     if (item.key === 'ArrowLeft' && index > 0) {
         div.children[index - 1].focus();
     } 
     if (item.key === 'ArrowRight' && index < div.children.length - 1) {
         div.children[index + 1].focus();
     }
-
     if (item.key === 'Backspace') {
         if (input.value === '' && index > 0) {
             div.children[index - 1].focus()
         } else {
             input.value = '';
         }
-
     }
-};
+    if (item.key === ' ' && index < div.children.length) {
+        div.children[index + 1].focus()
+    }
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Backspace') {
+        if (document.activeElement.tagName != 'INPUT') {
+            const divAtual = divInputs.children[numDiv];
+            const ultimoInput = divAtual.children[divAtual.children.length-1];
+            ultimoInput.focus();
+        }
+    }
+
+    if (document.activeElement.tagName !== 'INPUT') {
+        const divAtual = divInputs.children[numDiv];
+        const ultimoInput = divAtual.children[0];
+        ultimoInput.focus();
+    }
+})
