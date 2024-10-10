@@ -112,10 +112,12 @@ form.addEventListener('submit', function(e) {
     })
 
     const copiaResposta = [...caracteresResposta];
+
+    respostasUser.forEach((input, index) => {
         if (input.value === copiaResposta[index]) {
             window.requestAnimationFrame(() => input.classList.add('correto')); // Forçar repaint
             copiaResposta[index] = null; // Marca a letra correta
-        }    
+        }        
     });
 
     // Segunda passagem para verificar letras quase corretas
