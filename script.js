@@ -1,8 +1,19 @@
+const form = document.querySelector('form');
+
 const divInputs = document.getElementById('div-inputs');
 const button = document.querySelector('button');
-const form = document.querySelector('form');
 const pMensagem = document.getElementById('p-mensagem');
 let numDiv = 0;
+
+const divLetras = document.getElementById('div-letras');
+const alfabeto = [
+    'a', 'b', 'c', 'd', 'e', 'f', 
+    'g', 'h', 'i', 'j', 'k', 'l',
+    'm', 'n', 'o', 'p', 'q', 'r',
+    's', 't', 'u', 'v', 'w', 'x',
+    'y', 'z'
+];
+
 
 const trocarButton = document.getElementById('trocar-button');
 trocarButton.addEventListener('click', function() {
@@ -78,6 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         divInputs.appendChild(div);
     };
+
+    for (letra of alfabeto) {
+        let p = document.createElement('p');
+        p.textContent = letra;
+        divLetras.appendChild(p);
+    }
 });
 
 

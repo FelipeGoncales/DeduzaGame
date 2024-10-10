@@ -49,7 +49,7 @@ form {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
     align-items: center;
     justify-content: center;
 }
@@ -91,37 +91,6 @@ input {
     }
 }
 
-.div-button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    & button {
-        cursor: pointer;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 1.2rem;
-        line-height: 15px;
-        padding: 20px;
-        background-color: var(--cor-sec);
-        color: var(--cor-ter);
-        border: none;
-        border-radius: 0.2rem;
-        &:hover {
-            background-color: rgba(235, 241, 255, 0.829)
-        }
-    }
-}
-
-#p-mensagem {
-    justify-self: flex-start;
-    line-height: 1.2rem;
-    text-transform: uppercase;
-    font-size: 1.3rem;
-    color: var(--cor-sec);
-    font-weight: bold;
-}
-
 #trocar-button {
     cursor: pointer;
     border: none;
@@ -144,6 +113,58 @@ input {
     &:hover {
         background-color: rgba(235, 241, 255, 0.829)
     }
+}
+
+#div-letras {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 550px;
+    & p {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: var(--bg-color);
+        width: 45px;
+        height: 45px;
+        border-radius: 5px;
+        background-color: var(--cor-sec);
+        &:hover {
+            background-color: rgba(235, 241, 255, 0.829)
+        }
+    }
+    & button  {
+        cursor: pointer;
+        color: var(--bg-color);
+        text-transform: uppercase;
+        background-color: var(--cor-sec);
+        order: 999;
+        font-size: 1rem;
+        font-weight: bold;
+        height: 45px;
+        box-sizing: border-box;
+        padding: 5px 30px;
+        border-radius: 5px;
+        border: none;
+        &:hover {
+            background-color: rgba(235, 241, 255, 0.829)
+        }
+    }
+}
+
+#p-mensagem {
+    justify-self: flex-start;
+    line-height: 1.2rem;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    color: var(--cor-sec);
+    font-weight: bold;
 }
 
 .correto {
