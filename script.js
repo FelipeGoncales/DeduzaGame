@@ -62,6 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         input.addEventListener('keydown', function(event) {
             manipularKeys(event, input, index, div);
+            if (!alfabeto.contains(event.key)) {
+                event.preventDefault()
+            }
         });
 
         div.appendChild(input);
@@ -141,9 +144,9 @@ form.addEventListener('submit', function(e) {
         const value = (input.value).toLocaleLowerCase()
 
         if (value === copiaResposta[index]) {
-            window.requestAnimationFrame(() => input.classList.add('correto')); // Forçar repaint
-            copiaResposta[index] = null; // Marca a letra correta
-            
+            input.classList.add('correto');
+            copiaResposta[index] = null;
+                        
             const letra = document.getElementById(value);
             if (letra.classList.contains('letra-quase')) {
                 letra.classList.replace('letra-quase','letra-correta');
@@ -155,17 +158,16 @@ form.addEventListener('submit', function(e) {
         }        
     });
 
-    // Segunda passagem para verificar letras quase corretas
     respostasUser.forEach((input, index) => {
-        const value = (input.value).toLocaleLowerCase()
+        const value = (input.value).toLocaleLowerCase();
         const letra = document.getElementById(value);
 
-        if (value !== caracteresResposta[index]) { // Verifica apenas se não é a letra corretaSSS
+        if (value !== caracteresResposta[index]) {
             if (copiaResposta.includes(value)) {
-                input.classList.add('quase-correto')
+                input.classList.add('quase-correto');
 
                 if (!letra.classList.contains('letra-correta')) {
-                    letra.classList.add('letra-quase')
+                    letra.classList.add('letra-quase');
                 }
                 if (letra.classList.contains('letra-incorreta')) {
                     letra.classList.replace('letra-incorreta','letra-quase');
@@ -173,10 +175,10 @@ form.addEventListener('submit', function(e) {
 
                 const indexRepetido = copiaResposta.indexOf(value);
                 if (indexRepetido >= 0) {
-                    copiaResposta[indexRepetido] = null; // Marca a letra quase correta
+                    copiaResposta[indexRepetido] = null;
                 }
             } else {
-                input.style.backgroundColor = 'var(--cor-ter)'; // Marca a letra incorreta
+                input.style.backgroundColor = 'var(--cor-ter)';
                 
                 if (!letra.classList.contains('letra-correta') && !letra.classList.contains('letra-quase')) {
                     letra.classList.add('letra-incorreta');
