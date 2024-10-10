@@ -25,7 +25,7 @@ body {
     flex-direction: column;
     gap: 10px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     background-color: var(--bg-color);
 }
 
@@ -34,24 +34,46 @@ header {
     justify-content: center;
     align-items: center;
     background: none;
+    position: relative;
+}
+
+#p-mensagem {
+    display: none;
+    background-color: #0e37f0;
+    padding: 5px 10px;
+    padding-top: 7px;
+    border-radius: 5px;
+    bottom: -45px;
+    justify-content: center;
+    position: absolute;
+    height: 22px;
+    line-height: 1.2rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--cor-sec);
+    font-weight: bold;
 }
 
 h1 {
     text-transform: uppercase;
-    font-size: 3.4rem;
+    font-size: 3rem;
     font-weight: bold;
     letter-spacing: 3px;
     color: var(--cor-sec);
-    line-height: 3rem;
+    line-height: 2.2rem;
 }
 
 form {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
     align-items: center;
     justify-content: center;
+    & button  {
+        display: none;
+    }
 }
 
 #div-inputs {
@@ -69,11 +91,11 @@ input {
     line-height: -10px;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 2.3rem;
+    font-size: 2rem;
     color: var(--cor-sec) !important;
     border-radius: 0.3rem;
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
     text-align: center;
     caret-color: transparent;
     border: 4px solid var(--cor-sec);
@@ -89,6 +111,54 @@ input {
         padding: 0;
         opacity: 1;
     }
+}
+
+#div-letras {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 450px;
+    & p { 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: var(--bg-color);
+        width: 40px;
+        height: 55px;
+        border-radius: 5px;
+        background-color: #35375a;
+        color: var(--cor-sec);
+    }
+}
+
+.letra-correta {
+    background-color: var(--cor-right) !important;
+}
+
+.letra-quase {
+    background-color: var(--cor-quase) !important;
+}
+
+.letra-incorreta{
+    opacity: 0.15 !important;
+}
+
+.correto {
+    background-color: #04ba93 !important;
+    border: none;
+    opacity: 1 !important;
+    color: var(--cor-sec) !important;
+}
+.quase-correto {
+    background-color: var(--cor-quase) !important;
+    border: none; 
+    opacity: 1 !important;
+    color: var(--cor-sec) !important;
 }
 
 #trocar-button {
@@ -107,100 +177,14 @@ input {
     gap: 3px;
     border-radius: 30px;
     line-height: 15px;
+    transition: 0.2s;
     & i {
         font-size: 0.9rem;
     }
     &:hover {
-        background-color: rgba(235, 241, 255, 0.897)
+        scale: 1.1;
     }
 }
-
-#div-letras {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 550px;
-    & p {
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1rem;
-        text-transform: uppercase;
-        font-weight: bold;
-        color: var(--bg-color);
-        width: 45px;
-        height: 45px;
-        border-radius: 5px;
-        background-color: var(--cor-sec);
-        &:hover {
-            background-color: rgba(235, 241, 255, 0.897)
-        }
-    }
-    & button  {
-        cursor: pointer;
-        color: var(--bg-color);
-        text-transform: uppercase;
-        background-color: var(--cor-sec);
-        order: 999;
-        font-size: 1rem;
-        font-weight: bold;
-        height: 45px;
-        box-sizing: border-box;
-        padding: 5px 30px;
-        border-radius: 5px;
-        border: none;
-        &:hover {
-            background-color: rgba(235, 241, 255, 0.829)
-        }
-    }
-}
-
-.letra-correta {
-    background-color: var(--cor-right) !important;
-    color: var(--cor-sec) !important;
-}
-
-.letra-quase {
-    background-color: var(--cor-quase) !important;
-    color: var(--cor-sec) !important;
-}
-
-.letra-incorreta{
-    opacity: 0.4 !important;
-}
-
-#p-mensagem {
-    display: flex;
-    gap: 20px;
-    height: 22px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    justify-self: flex-start;
-    line-height: 1.2rem;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 1.3rem;
-    color: var(--cor-sec);
-    font-weight: bold;
-    transition: 0.2s;
-}
-
-.correto {
-    background-color: #04ba93 !important;
-    border: none;
-    opacity: 1 !important;
-    color: var(--cor-sec) !important;
-}
-.quase-correto {
-    background-color: var(--cor-quase) !important;
-    border: none; 
-    opacity: 1 !important;
-    color: var(--cor-sec) !important;
-}
-
 
 @media (max-width: 426px) {
     * {

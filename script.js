@@ -24,9 +24,9 @@ let listaPalavras = [
     'amigo', 'salvo', 'piano', 'pasta', 'carta',
     'peito', 'salto', 'carro', 'menta', 'banco',
     'poste', 'sorte', 'tigre', 'peixe', 'cesta',
-    'festa', 'bicho', 'dolar', 'grato', 'tinta',
+    'festa', 'bicho', 'dólar', 'grato', 'tinta',
     'cinto', 'brisa', 'fruta', 'torre', 'troco',
-    'linda', 'junto', 'dente', 'salao', 'verde',
+    'linda', 'junto', 'dente', 'salão', 'verde',
     'trigo', 'sabor', 'pouco', 'corte', 'amplo',
     'jovem', 'tempo', 'vazio', 'banda', 'cacau',
     'cabra', 'certa', 'falar', 'ninho', 'mundo',
@@ -37,7 +37,7 @@ let listaPalavras = [
     'morar', 'novas', 'lente', 'trono', 'parar',
     'grilo', 'navio', 'ficha', 'vapor', 'gente',
     'barco', 'pensa', 'limpo', 'raiva', 'calça',
-    'acido', 'votar', 'poema', 'rumor', 'rimar',
+    'ácido', 'votar', 'poema', 'rumor', 'rimar',
     'deixa', 'notas', 'macho', 'pauta', 'lavar',
     'cifra', 'troca', 'fosso', 'carne', 'morte', 
     'seção', 'bicho', 'fundo', 'canto', 'termo'
@@ -115,13 +115,13 @@ form.addEventListener('submit', function(e) {
     const respostasUser = Array.from(divsDivInput[numDiv].children);
 
     for (let input of respostasUser) {
-        if (!input.value) {
+        if (!input.value.replace(' ', '')) {
             preenchidos = false;
             break;
         }
     }
     
-    if (!preenchidos) {
+    if (preenchidos === false) {
         return;
     }
 
@@ -145,10 +145,10 @@ form.addEventListener('submit', function(e) {
             copiaResposta[index] = null; // Marca a letra correta
             
             const letra = document.getElementById(value);
-            if (Array.from(letra.classList).includes('letra-quase')) {
+            if (letra.classList.contains('letra-quase')) {
                 letra.classList.replace('letra-quase','letra-correta');
             }
-            if (Array.from(letra.classList).includes('letra-incorreta')) {
+            if (letra.classList.contains('letra-incorreta')) {
                 letra.classList.replace('letra-incorreta', 'letra-correta');
             }
             letra.classList.add('letra-correta');
@@ -164,8 +164,11 @@ form.addEventListener('submit', function(e) {
             if (copiaResposta.includes(value)) {
                 input.classList.add('quase-correto')
 
-                if (!Array.from(letra.classList).includes('letra-correta')) {
+                if (!letra.classList.contains('letra-correta')) {
                     letra.classList.add('letra-quase')
+                }
+                if (letra.classList.contains('letra-incorreta')) {
+                    letra.classList.replace('letra-incorreta','letra-quase');
                 }
 
                 const indexRepetido = copiaResposta.indexOf(value);
@@ -175,7 +178,7 @@ form.addEventListener('submit', function(e) {
             } else {
                 input.style.backgroundColor = 'var(--cor-ter)'; // Marca a letra incorreta
                 
-                if (!Array.from(letra.classList).includes('letra-correta')) {
+                if (!letra.classList.contains('letra-correta') && !letra.classList.contains('letra-quase')) {
                     letra.classList.add('letra-incorreta');
                 }
             }
@@ -188,9 +191,11 @@ form.addEventListener('submit', function(e) {
 
     if (word === palavra) {
         pMensagem.textContent = 'Você acertou!';
+        pMensagem.style.display = 'block';
         return;
     } else if (numDiv === divInputs.children.length - 1) {
-        pMensagem.innerHTML = `<span>Você perdeu!</span> <span>Resposta: "${palavra}"</span>`;
+        pMensagem.innerHTML = `Resposta: "${palavra}"`;
+        pMensagem.style.display = 'block';
         return;
     } else if (numDiv < divInputs.children.length - 1) {
         numDiv++;
