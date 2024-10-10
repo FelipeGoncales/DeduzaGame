@@ -47,6 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         input.addEventListener('input', function() {
             enterProximoInput(input, index, div);
+
+            setTimeout(() => {
+                if (input.value !== '') {
+                    enterProximoInput(input, index, div);
+                }
+            }, 0);
         });
 
         input.addEventListener('keydown', function(event) {
@@ -115,7 +121,7 @@ form.addEventListener('submit', function(e) {
 
     respostasUser.forEach((input, index) => {
         if (input.value === copiaResposta[index]) {
-            input.style.backgroundColor = 'var(--cor-right)';
+            input.classList.add('correto')
             copiaResposta[index] = null; // Marca a letra correta
         }
     });
@@ -124,7 +130,7 @@ form.addEventListener('submit', function(e) {
     respostasUser.forEach((input, index) => {
         if (input.value !== caracteresResposta[index]) { // Verifica apenas se não é a letra correta
             if (copiaResposta.includes(input.value)) {
-                input.style.backgroundColor = 'var(--cor-quase)';
+                input.classList.add('quase-correto')
                 const indexRepetido = copiaResposta.indexOf(input.value);
                 if (indexRepetido >= 0) {
                     copiaResposta[indexRepetido] = null; // Marca a letra quase correta
@@ -134,9 +140,6 @@ form.addEventListener('submit', function(e) {
             }
         }
 
-        input.style.border = 'none';
-        input.style.opacity = '1';
-        input.style.color = 'white';
         input.disabled = true;
 
         word += input.value;
