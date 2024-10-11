@@ -14,6 +14,7 @@
     --cor-ter: #191236;
     --cor-right: #04ba93;
     --cor-quase: #df9e26;
+    --cor-bg-letras: #35375a;
 }
 
 body {
@@ -117,13 +118,18 @@ input {
 }
 
 #div-letras {
+    left:calc(-108px/2);
+    position: relative;
     display: flex;
     gap: 8px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 520px;
-    & p { 
+    width: 455px;
+    & p, button, i{ 
+        box-sizing: border-box;
+        border: none;
+        cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -131,11 +137,24 @@ input {
         text-transform: uppercase;
         font-weight: bold;
         color: var(--bg-color);
-        width: 50px;
+        width: 43px;
         height: 7vh;
         border-radius: 5px;
-        background-color: #35375a;
+        background-color: var(--cor-bg-letras);
         color: var(--cor-sec);
+    }
+    & button {
+        position: absolute;
+        width: auto;
+        bottom: 0;
+        padding: 20px;
+        right: -108px;
+    }
+    & i {
+        position: absolute;
+        top: 0;
+        font-size: 0.7rem;
+        right: -108px;
     }
 }
 
@@ -232,6 +251,6 @@ input {
     }
     #p-mensagem {
         padding: 2px 10px;
-        padding-top: 9px;
+        padding-top: 6px;
     }
 }

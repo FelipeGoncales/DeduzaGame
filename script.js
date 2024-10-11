@@ -93,14 +93,29 @@ document.addEventListener('DOMContentLoaded', function() {
         p.id = letra;
         divLetras.appendChild(p);
 
-        p.addEventListener('click', function() {
-            const input = document.activeElement;
-            input.value = p.textContent
-        })
-    }
-    )
-});
+        p.addEventListener('mousedown', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const divAtual = divInputs.children[numDiv];
+            let input = '';
 
+            if (document.activeElement.tagName !== 'INPUT') {
+                input = divAtual.children[0];
+            } else if (document.activeElement.tagName === 'INPUT') {
+                input = document.activeElement;
+            }
+            
+            input.focus();
+            input.value = p.textContent;
+
+            const divLista = Array.from(div.children);
+            const index = divLista.indexOf(input);
+
+            enterProximoInput(input, index, divAtual);
+        });
+    });
+});
 
 form.addEventListener('submit', function(e) {
     e.preventDefault()
@@ -271,3 +286,19 @@ document.addEventListener('keydown', function(event) {
         ultimoInput.focus();
     }
 })
+
+const deleteButton = document.getElementById('delete-button');
+deleteButton.addEventListener('click', function() {
+    const divAtual = divInputs.children[numDiv];
+    let input = document.activeElement;
+
+    if (document.activeElement.tagName !== 'INPUT') {
+        input = divAtual.children[0];
+    }
+
+    const backspaceEvent = new KeyboardEvent('keydown', {key: 'Backspace'});
+
+    const index = Array.from(divAtual.children).indexOf(input);
+
+    manipularKeys(backspaceEvent, input, index, divAtual);
+});
