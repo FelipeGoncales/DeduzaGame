@@ -118,7 +118,6 @@ input {
 }
 
 #div-letras {
-    left:calc(-108px/2);
     position: relative;
     display: flex;
     gap: 8px;
@@ -142,19 +141,6 @@ input {
         border-radius: 5px;
         background-color: var(--cor-bg-letras);
         color: var(--cor-sec);
-    }
-    & button {
-        position: absolute;
-        width: auto;
-        bottom: 0;
-        padding: 20px;
-        right: -108px;
-    }
-    & i {
-        position: absolute;
-        top: 0;
-        font-size: 0.7rem;
-        right: -108px;
     }
 }
 
