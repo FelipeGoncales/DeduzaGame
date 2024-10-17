@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
     caracteresResposta = palavra.split('');
 
     const div = document.createElement('div');
+    div.classList.add('div-pai-inputs')
 
     caracteresResposta.forEach((_, index) => {
         const input = document.createElement('input');
@@ -166,13 +167,17 @@ form.addEventListener('submit', function(e) {
     for (let input of respostasUser) {
         if (!input.value.replace(' ', '')) {
             preenchidos = false;
+            input.parentNode.classList.add('shake');
+            setTimeout(() => {
+                input.parentNode.classList.remove('shake');
+            }, 500);
             break;
-        }
-    }
+        };
+    };
     
     if (preenchidos === false) {
         return;
-    }
+    };
 
     divsDivInput.forEach((item) => {
         const div = Array.from(item.children);
@@ -180,9 +185,9 @@ form.addEventListener('submit', function(e) {
         if (divsDivInput[numDiv] != div) {
             for (let input of div) {
                 input.disabled = true;
-            }
-        }
-    })
+            };
+        };
+    });
 
     const copiaResposta = [...caracteresResposta];
 
@@ -196,12 +201,12 @@ form.addEventListener('submit', function(e) {
             const letra = document.getElementById(value);
             if (letra.classList.contains('letra-quase')) {
                 letra.classList.replace('letra-quase','letra-correta');
-            }
+            };
             if (letra.classList.contains('letra-incorreta')) {
                 letra.classList.replace('letra-incorreta', 'letra-correta');
-            }
+            };
             letra.classList.add('letra-correta');
-        }        
+        };       
     });
 
     respostasUser.forEach((input, index) => {
@@ -214,23 +219,23 @@ form.addEventListener('submit', function(e) {
 
                 if (!letra.classList.contains('letra-correta')) {
                     letra.classList.add('letra-quase');
-                }
+                };
                 if (letra.classList.contains('letra-incorreta')) {
                     letra.classList.replace('letra-incorreta','letra-quase');
-                }
+                };
 
                 const indexRepetido = copiaResposta.indexOf(value);
                 if (indexRepetido >= 0) {
                     copiaResposta[indexRepetido] = null;
-                }
+                };
             } else {
                 input.classList.add('incorreto');
                 
                 if (!letra.classList.contains('letra-correta') && !letra.classList.contains('letra-quase')) {
                     letra.classList.add('letra-incorreta');
-                }
-            }
-        }
+                };
+            };
+        };
 
         input.disabled = true;
 
@@ -248,15 +253,15 @@ form.addEventListener('submit', function(e) {
     } else if (numDiv < divInputs.children.length - 1) {
         numDiv++;
 
-        const div = Array.from(divsDivInput[numDiv].children)
+        const div = Array.from(divsDivInput[numDiv].children);
 
         div.forEach((input) => {
             input.disabled = false;
-        })
+        });
         
         divsDivInput[numDiv].children[0].focus();
-    }
-})
+    };
+});
 
 
 // Funções adicionadas aos inputs
@@ -289,24 +294,24 @@ function enterProximoInput(input, index, div) {
 function manipularKeys(item, input, index, div) {
     if (!alfabeto.includes(item.key) && !['Enter', 'Backspace'].includes(item.key)) {
         item.preventDefault();
-    }
+    };
     if (item.key === 'ArrowLeft' && index > 0) {
         div.children[index - 1].focus();
-    } 
+    };
     if (item.key === 'ArrowRight' && index < div.children.length - 1) {
         div.children[index + 1].focus();
-    }
+    };
     if (item.key === 'Backspace') {
         if (input.value === '' && index > 0) {
             div.children[index - 1].focus()
         } else {
             input.value = '';
-        }
-    }
+        };
+    };
     if (item.key === ' ' && index < div.children.length) {
         div.children[index + 1].focus()
-    }
-}
+    };
+};
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Backspace') {
@@ -314,12 +319,12 @@ document.addEventListener('keydown', function(event) {
             const divAtual = divInputs.children[numDiv];
             const ultimoInput = divAtual.children[divAtual.children.length-1];
             ultimoInput.focus();
-        }
-    }
+        };
+    };
 
     if (document.activeElement.tagName !== 'INPUT') {
         const divAtual = divInputs.children[numDiv];
         const ultimoInput = divAtual.children[0];
         ultimoInput.focus();
-    }
-})
+    };
+});
