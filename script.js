@@ -103,8 +103,7 @@ let palavra = '';
 let caracteresResposta = [];
 
 document.addEventListener('DOMContentLoaded', function() {
-    // palavra = listaPalavras[Math.floor(Math.random() * listaPalavras.length)];
-    palavra = 'ícone';
+    palavra = listaPalavras[Math.floor(Math.random() * listaPalavras.length)];
     caracteresResposta = palavra.split('');
 
     const div = document.createElement('div');
