@@ -225,6 +225,16 @@ input {
     75% { transform: translateX(-5px); }
 }
 
+@media (max-width: 960px) {
+    body {
+        flex-direction: column;
+    }
+    form {
+        margin-bottom: 0;
+        padding: 0;
+    }
+}
+
 @media (max-width: 530px) {
     header {
         margin-top: 40px;
@@ -235,10 +245,6 @@ input {
         padding-top: 9px;
         top: 15px;
         right: 13px;
-    }
-    form {
-        gap: 7vh;
-        padding-bottom: 90px;
     }
 }
 
