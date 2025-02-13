@@ -103,7 +103,8 @@ let palavra = '';
 let caracteresResposta = [];
 
 document.addEventListener('DOMContentLoaded', function() {
-    palavra = listaPalavras[Math.floor(Math.random() * listaPalavras.length)];
+    // palavra = listaPalavras[Math.floor(Math.random() * listaPalavras.length)];
+    palavra = 'ícone';
     caracteresResposta = palavra.split('');
 
     const div = document.createElement('div');
@@ -191,20 +192,25 @@ form.addEventListener('submit', function(e) {
 
     const copiaResposta = [...caracteresResposta];
     var correto = false;
+    var indexCaracterAcento = null;
     
-    respostasUser.forEach((input, index) => {
-        const value = (input.value).toLocaleLowerCase()
+    var listaA = ['à', 'á', 'â', 'ã']
+    var listaO = ['ó', 'ô', 'ò'];
+    var listaC = ['ç']
+    var listaE = ['é', 'ê'];
+    var listaI = ['í', 'ì'];
+    var listaU = ['ú', 'ù'];
 
-        let listaA = ['à', 'á', 'â', 'ã']
-        let listaO = ['ó', 'ô', 'ò'];
-        let listaC = ['ç']
-        let listaE = ['é', 'ê', 'à'];
+    respostasUser.forEach((input, index) => {
+        correto = false;
+        const value = (input.value).toLocaleLowerCase()
 
         function verificarCaracterEspecial(caracter, lista) {
             if (value === caracter && lista.includes(copiaResposta[index])) {
                 correto = true;
                 input.value = copiaResposta[index];
-                return;   
+                copiaResposta[index] = caracter;
+                indexCaracterAcento = index; 
             }; 
         }
 
@@ -212,8 +218,10 @@ form.addEventListener('submit', function(e) {
         verificarCaracterEspecial('o', listaO);
         verificarCaracterEspecial('c', listaC);
         verificarCaracterEspecial('e', listaE);
+        verificarCaracterEspecial('i', listaI);
+        verificarCaracterEspecial('u', listaU);
 
-        if (value === copiaResposta[index] || correto === true) {
+        if (value === caracteresResposta[index] || correto === true) {
             input.classList.add('correto');
             copiaResposta[index] = null;
                         
@@ -228,12 +236,33 @@ form.addEventListener('submit', function(e) {
         };       
     });
 
+    let copiaLista = [...caracteresResposta]
+
     respostasUser.forEach((input, index) => {
-        const value = (input.value).toLocaleLowerCase();
+        const value = (input.value).toLowerCase();
         const letra = document.getElementById(value);
 
-        if (value !== caracteresResposta[index] && !correto) {
-            if (copiaResposta.includes(value)) {
+        if (value !== copiaLista[index]) {
+            if (listaA.includes(caracteresResposta[index])) {
+                copiaLista[index] = copiaLista[index].replace(/[ãàá]/g, 'a')
+            }
+            if (listaE.includes(caracteresResposta[index])) {
+                copiaLista[index] = copiaLista[index].replace(/[éèê]/g, 'e')
+            }
+            if (listaC.includes(caracteresResposta[index])) {
+                copiaLista[index] = copiaLista[index].replace(/[ç]/g, 'c')
+            }
+            if (listaO.includes(caracteresResposta[index])) {
+                copiaLista[index] = copiaLista[index].replace(/[ôóò]/g, 'o')
+            }
+            if (listaI.includes(caracteresResposta[index])) {
+                copiaLista[index] = copiaLista[index].replace(/[íì]/g, 'i')
+            }
+            if (listaU.includes(caracteresResposta[index])) {
+                copiaLista[index] = copiaLista[index].replace(/[ùú]/g, 'u')
+            }
+
+            if (copiaLista.includes(value)) {
                 input.classList.add('quase-correto');
 
                 if (!letra.classList.contains('letra-correta')) {
@@ -258,7 +287,7 @@ form.addEventListener('submit', function(e) {
 
         input.disabled = true;
 
-        if (correto) {
+        if (correto && index === indexCaracterAcento) {
             word += caracteresResposta[index];
         } else {
             word += value;
