@@ -1,0 +1,267 @@
+@import url(https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&display=swap);
+
+* {
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+    font-family: "Baloo Paaji 2", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --bg-color: #1e1f33;
+    --cor-sec: #ebf1ff;
+    --cor-ter: #191236;
+    --cor-right: #04ba93;
+    --cor-quase: #df9e26;
+    --cor-bg-letras: #35375a;
+}
+
+body {
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: var(--bg-color);
+    gap: 50px;
+}
+
+.div-form-pai {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+}
+
+#p-mensagem {
+    display: none;
+    background-color: #0e37f0;
+    padding: 5px 10px;
+    padding-top: 8px;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    justify-content: center;
+    position: absolute;
+    height: 22px;
+    line-height: 1.2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--cor-sec);
+    font-weight: bold;
+    bottom: -55px;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: var(--cor-sec);
+    line-height: 2.2rem;
+}
+
+form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 7vh;
+    align-items: center;
+    justify-content: center;
+    & button  {
+        display: none;
+    }
+}
+
+#div-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    & div{
+        display: flex;
+        gap: inherit;
+    }
+}
+
+.shake {
+    animation: shake 0.5s ease;
+}
+
+input {
+    box-sizing: border-box;
+    line-height: -10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2rem;
+    color: var(--cor-sec) !important;
+    border-radius: 0.3rem;
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    caret-color: transparent;
+    border: 4px solid var(--cor-sec);
+    background: none;
+    outline: none;
+    opacity: 0.3;
+    &:disabled {
+        background-color: #ebf1ff;
+        opacity: 0.1;
+        color: var(--bg-color);
+    }
+    &:focus {
+        padding: 0;
+        opacity: 1;
+    }
+}
+
+.div-pai-letras {
+    display: flex;
+    position: relative;
+    top: calc(-55px/2);
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#div-letras {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 455px;
+    & p, button, i{ 
+        box-sizing: border-box;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: var(--bg-color);
+        width: 43px;
+        height: 7vh;
+        border-radius: 5px;
+        background-color: var(--cor-bg-letras);
+        color: var(--cor-sec);
+    }
+}
+
+.letra-correta {
+    background-color: var(--cor-right) !important;
+}
+
+.letra-quase {
+    background-color: var(--cor-quase) !important;
+}
+
+.letra-incorreta{
+    opacity: 0.15 !important;
+}
+
+.correto {
+    background-color: #04ba93 !important;
+    border: none;
+    opacity: 1 !important;
+    color: var(--cor-sec) !important;
+}
+.quase-correto {
+    background-color: var(--cor-quase) !important;
+    border: none; 
+    opacity: 1 !important;
+    color: var(--cor-sec) !important;
+}
+.incorreto {
+    background-color: var(--cor-ter) !important;
+    color: var(--cor-sec) !important;
+    opacity: 1 !important;
+    border: none !important;
+}
+
+#trocar-button {
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    border-radius: 30px;
+    line-height: 15px;
+    transition: 0.2s;
+    & i {
+        font-size: 0.9rem;
+    }
+    &:hover {
+        scale: 1.1;
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+@media (max-width: 530px) {
+    header {
+        margin-top: 40px;
+    }
+    #trocar-button {
+        scale: 0.9;
+        padding: 7px;
+        padding-top: 9px;
+        top: 15px;
+        right: 13px;
+    }
+    form {
+        gap: 7vh;
+        padding-bottom: 90px;
+    }
+}
+
+@media (max-width: 480px) {
+    * {
+        font-size: 15px;
+    }
+    input {
+        font-size: 2rem;
+        height: 12vw;
+        width: 12vw;
+        border: 3px solid var(--cor-sec);
+    }
+    #div-letras {
+        width: 92vw;
+        gap: 7px;
+        & p {
+            font-size: 1.4rem;
+            width: 8vw;
+        }
+    }
+    #p-mensagem {
+        padding: 2px 10px;
+        padding-top: 4px;
+    }
+}
