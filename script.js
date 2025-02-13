@@ -1,10 +1,8 @@
 const form = document.querySelector('form');
-
 const divInputs = document.getElementById('div-inputs');
 const button = document.querySelector('button');
 const pMensagem = document.getElementById('p-mensagem');
 let numDiv = 0;
-
 const divLetras = document.getElementById('div-letras');
 const alfabeto = [
     'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 
@@ -14,8 +12,9 @@ const alfabeto = [
 
 const trocarButton = document.getElementById('trocar-button');
 trocarButton.addEventListener('click', function() {
-    location.reload()
-})
+    location.reload();
+});
+
 let listaPalavras = [
     "amigo", "salvo", "piano", "pasta", "carta",
     "peito", "salto", "carro", "menta", "banco",
@@ -98,12 +97,11 @@ let listaPalavras = [
     "irmão", "régua", "extra"
   ];
 
-
 let palavra = '';
 let caracteresResposta = [];
 
 document.addEventListener('DOMContentLoaded', function() {
-    palavra = listaPalavras[Math.floor(Math.random() * listaPalavras.length)];
+    palavra = listaPalavras[Math.floor(Math.random() * listaPalavras.length)];;
     caracteresResposta = palavra.split('');
 
     const div = document.createElement('div');
@@ -156,16 +154,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 form.addEventListener('submit', function(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     let word = '';
     let preenchidos = true;
-
     const divsDivInput = Array.from(divInputs.children);
     const respostasUser = Array.from(divsDivInput[numDiv].children);
 
     for (let input of respostasUser) {
-        if (!input.value.replace(' ', '')) {
+        if (!input.value.trim()) {
             preenchidos = false;
             input.parentNode.classList.add('shake');
             setTimeout(() => {
@@ -174,148 +171,100 @@ form.addEventListener('submit', function(e) {
             break;
         };
     };
-    
-    if (preenchidos === false) {
-        return;
-    };
+    if (!preenchidos) return;
 
     divsDivInput.forEach((item) => {
-        const div = Array.from(item.children);
-
-        if (divsDivInput[numDiv] != div) {
-            for (let input of div) {
-                input.disabled = true;
-            };
-        };
+        if (item !== divsDivInput[numDiv]) {
+            Array.from(item.children).forEach(input => input.disabled = true);
+        }
     });
 
     const copiaResposta = [...caracteresResposta];
-    var correto = false;
-    var indexCaracterAcento = null;
-    
-    var listaA = ['à', 'á', 'â', 'ã']
-    var listaO = ['ó', 'ô', 'ò'];
-    var listaC = ['ç']
-    var listaE = ['é', 'ê'];
-    var listaI = ['í', 'ì'];
-    var listaU = ['ú', 'ù'];
+    let corretoGlobal = false;
+    let indexCaracterAcento = null;
+
+    let copiaLista = caracteresResposta.map(c => {
+        const listaA = ['à', 'á', 'â', 'ã'];
+        const listaO = ['ó', 'ô', 'ò'];
+        const listaC = ['ç'];
+        const listaE = ['é', 'ê'];
+        const listaI = ['í', 'ì'];
+        const listaU = ['ú', 'ù'];
+        if (listaA.includes(c)) return 'a';
+        if (listaO.includes(c)) return 'o';
+        if (listaC.includes(c)) return 'c';
+        if (listaE.includes(c)) return 'e';
+        if (listaI.includes(c)) return 'i';
+        if (listaU.includes(c)) return 'u';
+        return c;
+    });
 
     respostasUser.forEach((input, index) => {
-        correto = false;
-        const value = (input.value).toLocaleLowerCase()
+        let correto = false;
+        const value = input.value.toLowerCase();
 
         function verificarCaracterEspecial(caracter, lista) {
             if (value === caracter && lista.includes(copiaResposta[index])) {
                 correto = true;
-                input.value = copiaResposta[index];
+                input.value = copiaResposta[index]; 
                 copiaResposta[index] = caracter;
-                indexCaracterAcento = index; 
-            }; 
+                indexCaracterAcento = index;
+            }
         }
 
-        verificarCaracterEspecial('a', listaA);
-        verificarCaracterEspecial('o', listaO);
-        verificarCaracterEspecial('c', listaC);
-        verificarCaracterEspecial('e', listaE);
-        verificarCaracterEspecial('i', listaI);
-        verificarCaracterEspecial('u', listaU);
+        verificarCaracterEspecial('a', ['à', 'á', 'â', 'ã']);
+        verificarCaracterEspecial('o', ['ó', 'ô', 'ò']);
+        verificarCaracterEspecial('c', ['ç']);
+        verificarCaracterEspecial('e', ['é', 'ê']);
+        verificarCaracterEspecial('i', ['í', 'ì']);
+        verificarCaracterEspecial('u', ['ú', 'ù']);
 
-        if (value === caracteresResposta[index] || correto === true) {
+        if (value === caracteresResposta[index] || correto) {
             input.classList.add('correto');
-            copiaResposta[index] = null;
-                        
-            const letra = document.getElementById(value);
-            if (letra.classList.contains('letra-quase')) {
-                letra.classList.replace('letra-quase','letra-correta');
-            };
-            if (letra.classList.contains('letra-incorreta')) {
-                letra.classList.replace('letra-incorreta', 'letra-correta');
-            };
-            letra.classList.add('letra-correta');
-        };       
+            copiaLista[index] = null; // Remove da lista para evitar reuso
+            const letra = document.getElementById(value.replace(/[^a-z]/g, ''));
+            letra?.classList.add('letra-correta');
+        }
     });
-
-    let copiaLista = [...caracteresResposta]
 
     respostasUser.forEach((input, index) => {
-        const value = (input.value).toLowerCase();
-        const letra = document.getElementById(value);
+        const value = input.value.toLowerCase();
+        if (input.classList.contains('correto')) return;
 
-        if (value !== copiaLista[index]) {
-            if (listaA.includes(caracteresResposta[index])) {
-                copiaLista[index] = copiaLista[index].replace(/[ãàá]/g, 'a')
+        if (copiaLista.includes(value)) {
+            input.classList.add('quase-correto');
+            const letra = document.getElementById(value);
+            if (!letra.classList.contains('letra-correta')) {
+                letra.classList.add('letra-quase');
             }
-            if (listaE.includes(caracteresResposta[index])) {
-                copiaLista[index] = copiaLista[index].replace(/[éèê]/g, 'e')
-            }
-            if (listaC.includes(caracteresResposta[index])) {
-                copiaLista[index] = copiaLista[index].replace(/[ç]/g, 'c')
-            }
-            if (listaO.includes(caracteresResposta[index])) {
-                copiaLista[index] = copiaLista[index].replace(/[ôóò]/g, 'o')
-            }
-            if (listaI.includes(caracteresResposta[index])) {
-                copiaLista[index] = copiaLista[index].replace(/[íì]/g, 'i')
-            }
-            if (listaU.includes(caracteresResposta[index])) {
-                copiaLista[index] = copiaLista[index].replace(/[ùú]/g, 'u')
-            }
-
-            if (copiaLista.includes(value)) {
-                input.classList.add('quase-correto');
-
-                if (!letra.classList.contains('letra-correta')) {
-                    letra.classList.add('letra-quase');
-                };
-                if (letra.classList.contains('letra-incorreta')) {
-                    letra.classList.replace('letra-incorreta','letra-quase');
-                };
-
-                const indexRepetido = copiaLista.indexOf(value);
-                if (indexRepetido >= 0) {
-                    copiaLista[indexRepetido] = null;
-                };
-            } else {
-                input.classList.add('incorreto');
-                
-                if (!letra.classList.contains('letra-correta') && !letra.classList.contains('letra-quase')) {
-                    letra.classList.add('letra-incorreta');
-                };
-            };
-        };
-
-        input.disabled = true;
-
-        if (correto && index === indexCaracterAcento) {
-            word += caracteresResposta[index];
+            const pos = copiaLista.indexOf(value);
+            copiaLista[pos] = null;
         } else {
-            word += value;
+            input.classList.add('incorreto');
+            const letra = document.getElementById(value);
+            if (!letra.classList.contains('letra-correta') && !letra.classList.contains('letra-quase')) {
+                letra.classList.add('letra-incorreta');
+            }
         }
     });
 
-    if (word === palavra) {
+    const tentativa = respostasUser.map(input => input.value.toLowerCase()).join('');
+    if (tentativa === palavra) {
         pMensagem.textContent = 'Você acertou!';
         pMensagem.style.display = 'flex';
         return;
     } else if (numDiv === divInputs.children.length - 1) {
-        pMensagem.innerHTML = `Resposta: "${palavra}"`;
+        pMensagem.textContent = `Resposta: "${palavra}"`;
         pMensagem.style.display = 'flex';
         return;
-    } else if (numDiv < divInputs.children.length - 1) {
+    } else {
         numDiv++;
-
-        const div = Array.from(divsDivInput[numDiv].children);
-
-        div.forEach((input) => {
-            input.disabled = false;
-        });
-        
-        divsDivInput[numDiv].children[0].focus();
-    };
+        const proximaDiv = divInputs.children[numDiv];
+        Array.from(proximaDiv.children).forEach(input => input.disabled = false);
+        proximaDiv.children[0].focus();
+    }
 });
 
-
-// Funções adicionadas aos inputs
 
 function enterProximoInput(input, index, div) {
     if (input.value !== '') {
