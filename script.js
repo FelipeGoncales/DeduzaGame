@@ -271,9 +271,9 @@ form.addEventListener('submit', function(e) {
                     letra.classList.replace('letra-incorreta','letra-quase');
                 };
 
-                const indexRepetido = copiaResposta.indexOf(value);
+                const indexRepetido = copiaLista.indexOf(value);
                 if (indexRepetido >= 0) {
-                    copiaResposta[indexRepetido] = null;
+                    copiaLista[indexRepetido] = null;
                 };
             } else {
                 input.classList.add('incorreto');
